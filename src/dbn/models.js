@@ -1,0 +1,52 @@
+const  Sequelize=require("sequelize")
+
+
+const seq = require('./db.js')
+
+const User=seq.define('user',{
+    username:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    password:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    nickname:{
+        type:Sequelize.STRING,
+        comment:"昵称"
+    }
+
+})
+const Blog=seq.define("blog",{
+    title:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    content:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    userId:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+    }
+})
+
+
+// 外键关联
+Blog.belongsTo(User,{
+    foreignKey:'userId'
+})
+
+User.hasMany(Blog,{
+    foreignKey:'userId'
+})
+
+
+// Blog.belongsTo(User)
+
+
+module.exports={
+    User,Blog
+}
