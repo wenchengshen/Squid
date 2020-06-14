@@ -23,7 +23,6 @@ async function getUserInfo(username,password){
          Object.assign(whereOpt,{passwod})
      }
 
-
      //
      const result=await User.findOne({
          attributes:['id','username','nickname','picture','city'],
@@ -42,6 +41,22 @@ async function getUserInfo(username,password){
 }
 
 
+/**
+ * 创建用户
+ * @param {string} username 用户名
+ * **/
+async function  createUserInfo({username,password,gender=3,nickname}){
+     const result =await User.create({
+         username,
+         password,
+         nickname:nickname?nickname:username,
+         gender
+     })
+    
+}
+
+
 module.exports={
-    getUserInfo
+    getUserInfo,
+    createUserInfo
 }

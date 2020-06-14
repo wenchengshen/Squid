@@ -40,7 +40,6 @@
     }
 }
 
-
 module.exports={
     FaliedModel,
     SuccessModel
