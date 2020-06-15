@@ -10,6 +10,8 @@ const {getUserInfo,createUserInfo} =require('../services/user')
 const {SuccessModel,FaliedModel} =require('../model/ResModel')
 const { errorMonitor } = require('koa')
 
+const doCrypto=require('../util/cryp')
+
 
 
 async  function isExist(username){
@@ -45,7 +47,7 @@ async function register({username,password,gender}){
       }
       //services 注册用户
       try{
-        const result= await createUserInfo({username,password,gender})
+        const result= await createUserInfo({username,password:doCrypto(password),gender})
         return new SuccessModel()
     }catch(err){
       console.log(err)

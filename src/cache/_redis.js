@@ -45,7 +45,7 @@ function get(key){
                 resolve(
                     JSON.parse(val)
                 )
-            }.catch(ex){
+            }catch(ex){
                 resolve(val)
             }
         })
