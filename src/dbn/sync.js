@@ -1,16 +1,16 @@
-const seq=require('./db')
+const seq=require('./seq')
 
-require('./models')
+require('./model')
 
 
 seq.authenticate().then(()=>{
-    console.log("is ok ")
+    console.log("create succis ok ")
 }).catch(res=>{
     console.log(res,"err")
 })
 
 seq.sync({force:true}).then(res=>{
-    console.log("lianjie ok")
+    console.log("同步数据创建成功 ok")
     process.exit()
 }).catch(err=>{
     console.log("err")

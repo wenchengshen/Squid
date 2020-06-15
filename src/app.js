@@ -7,7 +7,10 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 const index = require('./routes/index')
-const users = require('./routes/users')
+const user = require('./routes/view/user')
+
+
+const userAPIRouter=require('./routes/api/user')
 
 // error handler
 onerror(app)
@@ -24,17 +27,19 @@ app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
 
-// // logger
-// app.use(async (ctx, next) => {
-//   const start = new Date()
-//   await next()
-//   const ms = new Date() - start
-//   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-// })
+// logger
+app.use(async (ctx, next) => {
+  const start = new Date()
+  await next()
+  const ms = new Date() - start
+  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+})
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(user.routes(), user.allowedMethods())
+
+app.use(userAPIRouter.routes(),userAPIRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

@@ -1,3 +1,8 @@
+
+/**
+ * 
+ * sequelize
+ * **/
 const  Sq=require("sequelize")
 
 
