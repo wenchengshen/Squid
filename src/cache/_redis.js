@@ -1,7 +1,7 @@
 /**
  * @author wenc
  * @description  连接redis 的方法
- * 
+ *
  * **/
 
 const  redis=require('redis')
@@ -18,7 +18,7 @@ redisClient.on('err',err=>{
 /**
  * redis set
  * @param {string} key
- * **/ 
+ * **/
 
 function set(key,val,timeout=60*60){
    if(typeof val == 'object'){
@@ -41,7 +41,6 @@ function get(key){
                 return
             }
             try{
-
                 resolve(
                     JSON.parse(val)
                 )
