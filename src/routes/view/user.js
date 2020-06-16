@@ -28,7 +28,17 @@ router.get('/login', async (ctx, next) => {
 })
 
 router.get('/register', async (ctx, next) => {
+
+
+    const session=ctx.session
+
+    if(session.viewNum==null){
+        session.viewNum=0
+    }
+    session.viewNum++;
     await ctx.render('register', getLoginInfo(ctx))
+
+
 })
 
 module.exports = router
