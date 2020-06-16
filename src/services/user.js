@@ -20,7 +20,7 @@ async function getUserInfo(username,password){
          username
      }
      if(password){
-         Object.assign(whereOpt,{passwod})
+         Object.assign(whereOpt,{password})
      }
 
      //
@@ -35,7 +35,7 @@ async function getUserInfo(username,password){
          //未找到
          return result
      }
-
+     console.log("返回的数据 ",formateUser(result.dataValues))
      //添加格式化处理
      return formateUser(result.dataValues)
 }

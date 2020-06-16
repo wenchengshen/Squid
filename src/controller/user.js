@@ -11,6 +11,8 @@ const {SuccessModel,FaliedModel} =require('../model/ResModel')
 const { errorMonitor } = require('koa')
 
 const doCrypto=require('../util/cryp')
+// const { CITEXT } = require('sequelize/types')
+const user = require('../services/user')
 
 
 
@@ -56,13 +58,32 @@ async function register({username,password,gender}){
             message:"注册傻逼"
       })
     }
-
-      
-
-
 }
+
+
+async function login({ctx,username,password}){
+  //获取用户信息
+  
+  const userinfo =await getUserInfo(username,doCrypto(password))
+
+  console.log(userinfo,"userinfo")
+  if(!userinfo){
+    //不存在数据
+    return new FaliedModel({
+        erron:10003,
+        message:"登录失败"
+    })
+  }
+  //登陆成功
+  if(ctx.session.userinfo==null){
+      ctx.session.userinfo =userinfo;
+  }
+  return new SuccessModel()
+}
+
 
 module.exports ={
     isExist,
-    register
+    register,
+    login
 }
