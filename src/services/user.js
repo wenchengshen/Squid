@@ -20,7 +20,7 @@ async function getUserInfo(username,password){
          username
      }
      if(password){
-         Object.assign(whereOpt,{passwod})
+         Object.assign(whereOpt,{password})
      }
      //
      const result=await User.findOne({
@@ -32,6 +32,10 @@ async function getUserInfo(username,password){
          //未找到
          return result
      }
+<<<<<<< HEAD
+=======
+     console.log("返回的数据 ",formateUser(result.dataValues))
+>>>>>>> 64b4c11be3a8b206f41fe8ff5f21816c7cc319fe
      //添加格式化处理
      return formateUser(result.dataValues)
 }
