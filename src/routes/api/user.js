@@ -1,7 +1,7 @@
 /**
- * @description  
+ * @description
  * @author wencs
- * 
+ *
  * **/
 
 
@@ -15,7 +15,8 @@
  //注册路由
  router.post('/register',async (ctx,next)=>{
     const {username,password,gender}=ctx.request.body;
-    //调用 controller 方法
+     console.log(ctx.request.body);
+     //调用 controller 方法
     ctx.body=await register({username,password,gender})
  })
 
@@ -24,10 +25,20 @@
      //username
      const {username}=ctx.request.body;
      ctx.body=await isExist(username)
-
-    // console.log(ctx)
-
  })
+
+
+  //登录
+  router.post('/login', async (ctx, next) => {
+      //username
+      const {
+          username
+      } = ctx.request.body;
+  })
+
+
+
+
 
 
  module.exports=router

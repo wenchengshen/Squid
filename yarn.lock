@@ -1245,6 +1245,11 @@ koa-views@^6.2.0:
     mz "^2.4.0"
     pretty "^2.0.0"
 
+koa2-cookie-session@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npm.taobao.org/koa2-cookie-session/download/koa2-cookie-session-0.0.1.tgz#03d37a72867c5ad171a5ca57879db945b2040f48"
+  integrity sha1-A9N6coZ8WtFxpcpXh525RbIED0g=
+
 koa@^2.7.0:
   version "2.12.0"
   resolved "https://registry.npm.taobao.org/koa/download/koa-2.12.0.tgz#c92bfb42defd86f365c31bf63fe918db11fc5c74"
