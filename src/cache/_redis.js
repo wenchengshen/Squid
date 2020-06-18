@@ -1,6 +1,6 @@
 /**
  * @author wenc
- * @description  连接redis 的方法
+ * @description  连接redis 的方法 
  *
  * **/
 
@@ -20,6 +20,7 @@ redisClient.on('err',err=>{
 /**
  * redis set
  * @param {string} key
+ * @param {string} key
  * **/
 
 function set(key,val,timeout=60*60){
@@ -30,6 +31,11 @@ function set(key,val,timeout=60*60){
    redisClient.set(key,val)
    redisClient.expire(key,timeout)
 }
+
+
+/***
+ * @param {string}  get 获取
+ * ***/
 
 function get(key){
     const promise=new Promise((resolve,reject)=>{
@@ -55,6 +61,6 @@ function get(key){
 }
 
 
-module.export={
+module.exports={
     set
 }

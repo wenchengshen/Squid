@@ -1,7 +1,7 @@
 /**
- * @description  
+ * @description
  * @author wencs
- * 
+ *
  * **/
 
 
@@ -15,7 +15,8 @@ const {loginCheck} =require('../../middlewares/loginChecks')
  //注册路由
  router.post('/register',async (ctx,next)=>{
     const {username,password,gender}=ctx.request.body;
-    //调用 controller 方法
+     console.log(ctx.request.body);
+     //调用 controller 方法
     ctx.body=await register({username,password,gender})
  })
 
@@ -24,6 +25,29 @@ const {loginCheck} =require('../../middlewares/loginChecks')
      //username
      const {username}=ctx.request.body;
      ctx.body=await isExist(username)
+<<<<<<< HEAD
+=======
+ })
+
+
+  //登录
+  router.post('/login', async (ctx, next) => {
+      //username
+      const {
+          username
+      } = ctx.request.body;
+  })
+
+
+
+<<<<<<< HEAD
+
+
+
+ module.exports=router
+=======
+    // console.log(ctx)
+>>>>>>> 2dedd11a52bb776eeb56abc8f99a55ad25b17887
  })
 
 
@@ -38,3 +62,4 @@ const {loginCheck} =require('../../middlewares/loginChecks')
 
 
  module.exports=router
+>>>>>>> 64b4c11be3a8b206f41fe8ff5f21816c7cc319fe
