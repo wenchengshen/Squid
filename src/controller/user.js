@@ -64,7 +64,7 @@ async function register({username,password,gender}){
 async function login({ctx,username,password}){
   //获取用户信息
   
-  const userinfo =await getUserInfo(username,doCrypto(password))
+  const userInfo =await getUserInfo(username,doCrypto(password))
 
   console.log(userinfo,"userinfo")
   if(!userinfo){
@@ -75,8 +75,8 @@ async function login({ctx,username,password}){
     })
   }
   //登陆成功
-  if(ctx.session.userinfo==null){
-      ctx.session.userinfo =userinfo;
+  if(ctx.session.userInfo==null){
+      ctx.session.userInfo =userInfo;
   }
   return new SuccessModel()
 }
