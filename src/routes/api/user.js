@@ -8,7 +8,7 @@
  const router=require('koa-router')()
 
  const {isExist,register,login} =require('../../controller/user')
-
+const {loginCheck} =require('../../middlewares/loginChecks')
  router.prefix('/api/user')
 
 
@@ -24,13 +24,11 @@
      //username
      const {username}=ctx.request.body;
      ctx.body=await isExist(username)
-
-    // console.log(ctx)
  })
 
 
 
- router.post('/login',async (ctx,next)=>{
+ router.post('/login',loginCheck,async (ctx,next)=>{
    //username
    const {username,password}=ctx.request.body;
    ctx.body=await login({ctx,username,password})

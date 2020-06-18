@@ -27,7 +27,7 @@
                 const password = $inputPassword.val()
 
                 // 提交数据
-                ajax.post('/api/user/login', {
+                $.ajax.post('/api/user/login', {
                     userName,
                     password
                 }, function(err, data) {
