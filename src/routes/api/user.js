@@ -29,9 +29,12 @@ const {loginCheck} =require('../../middlewares/loginChecks')
 
   //登录
 
- router.post('/login',loginCheck,async (ctx,next)=>{
+ router.post('/login',async (ctx,next)=>{
    //username
    const {username,password}=ctx.request.body;
+
+console.log(username, "username")
+   
    ctx.body=await login({ctx,username,password})
 
   // console.log(ctx)
