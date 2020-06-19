@@ -28,7 +28,7 @@
 
                 // 提交数据
                 ajax.post('/api/user/login', {
-                    userName,
+                    username:userName,
                     password
                 }, function(err, data) {
                     if (err) {

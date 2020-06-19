@@ -52,7 +52,6 @@ async function register({username,password,gender}){
         const result= await createUserInfo({username,password:doCrypto(password),gender})
         return new SuccessModel()
     }catch(err){
-      console.log(err)
       return new FaliedModel({
             erron:10004,
             message:"注册傻逼"
@@ -63,10 +62,7 @@ async function register({username,password,gender}){
 
 async function login({ctx,username,password}){
   //获取用户信息
-  
   const userinfo =await getUserInfo(username,doCrypto(password))
-
-  console.log(userinfo,"userinfo")
   if(!userinfo){
     //不存在数据
     return new FaliedModel({
@@ -78,7 +74,9 @@ async function login({ctx,username,password}){
   if(ctx.session.userinfo==null){
       ctx.session.userinfo =userinfo;
   }
-  return new SuccessModel()
+  return new SuccessModel({
+     data: userinfo
+  })
 }
 
 

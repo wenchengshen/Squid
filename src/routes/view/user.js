@@ -1,8 +1,5 @@
 const router = require('koa-router')()
 
-
-
-
 /**
  * 获取登录信息
  * @param {Object} ctx ctx
@@ -28,16 +25,8 @@ router.get('/login', async (ctx, next) => {
 })
 
 router.get('/register', async (ctx, next) => {
-
-
     const session=ctx.session
-
-    if(session.viewNum==null){
-        session.viewNum=0
-    }
-    session.viewNum++;
     await ctx.render('register', getLoginInfo(ctx))
-
 
 })
 

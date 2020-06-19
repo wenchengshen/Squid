@@ -6,7 +6,6 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const index = require('./routes/index')
 const user = require('./routes/view/user')
 
 const { REDIS_CONF } = require('./conf/db')
@@ -59,7 +58,6 @@ app.use(session({
 // })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 
 app.use(userAPIRouter.routes(),userAPIRouter.allowedMethods())

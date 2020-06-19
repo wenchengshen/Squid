@@ -2,13 +2,16 @@
 
 
 
-const {DEFAULT_PICTURE}=require('../conf/constant')
+const {
+    DEFAUT_PICTURE
+} = require('../conf/constant')
 
 function _formateUserPicture(obj){
+      console.log(obj, "obj1")
   if(obj.picture === null){
-      obj.picture = DEFAULT_PICTURE
+      obj.picture = DEFAUT_PICTURE
   }
-  return
+  return obj
 }
 
 
@@ -16,8 +19,9 @@ function  formateUser(list){
    if(list===null){
        return list
    }
+   console.log(list,"list1")
    if(list instanceof  Array){
-       return  list,map(_formateUserPicture)
+       return  list.map(_formateUserPicture)
    }
    //单个对象
    return  _formateUserPicture(list)
