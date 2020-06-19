@@ -27,8 +27,13 @@
                 const password = $inputPassword.val()
 
                 // 提交数据
+<<<<<<< HEAD
                 ajax.post('/api/user/login', {
                     username:userName,
+=======
+                $.ajax.post('/api/user/login', {
+                    userName,
+>>>>>>> 3d14621356ba53e3b49dcf1d5578568f0a19e2e3
                     password
                 }, function(err, data) {
                     if (err) {

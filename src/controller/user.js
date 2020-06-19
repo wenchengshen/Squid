@@ -20,7 +20,6 @@ async  function isExist(username){
       //业务逻辑处理
       //servers
       //统一返回
-
       const userinfo =await getUserInfo(username)
       if(!userinfo){
         //存在
@@ -66,11 +65,12 @@ async function login({ctx,username,password}){
   if(!userinfo){
     //不存在数据
     return new FaliedModel({
-        erron:10003,
+        errno:10003,
         message:"登录失败"
     })
   }
   //登陆成功
+  debugger
   if(ctx.session.userinfo==null){
       ctx.session.userinfo =userinfo;
   }
