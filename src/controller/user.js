@@ -20,15 +20,14 @@ async  function isExist(username){
       //业务逻辑处理
       //servers
       //统一返回
-
-      const userinfo =await getUserInfo(username)
-      if(!userinfo){
+      const userInfo = await getUserInfo(username)
+      if (!userInfo) {
         //存在
-        return new SuccessModel(userinfo)
+        return new SuccessModel(userInfo)
       }else{
         //不存在数据
         return new FaliedModel({
-            erron:10003,
+            errno:10003,
             message:"用户已存在"
         })
       }
@@ -39,11 +38,11 @@ async  function isExist(username){
 async function register({username,password,gender}){
       //获取用户信息
       
-      const userinfo =await getUserInfo(username)
-      if(userinfo){
+      const userInfo =await getUserInfo(username)
+      if (userInfo) {
         //不存在数据
         return new FaliedModel({
-            erron:10003,
+            errno:10003,
             message:"用户已存在"
         })
       }
@@ -52,9 +51,8 @@ async function register({username,password,gender}){
         const result= await createUserInfo({username,password:doCrypto(password),gender})
         return new SuccessModel()
     }catch(err){
-      console.log(err)
       return new FaliedModel({
-            erron:10004,
+            errno:10004,
             message:"注册傻逼"
       })
     }
@@ -63,22 +61,23 @@ async function register({username,password,gender}){
 
 async function login({ctx,username,password}){
   //获取用户信息
-  
   const userInfo =await getUserInfo(username,doCrypto(password))
 
-  console.log(userinfo,"userinfo")
-  if(!userinfo){
+  console.log(userInfo, "userInfo")
+  if (!userInfo) {
     //不存在数据
     return new FaliedModel({
-        erron:10003,
+        errno:10003,
         message:"登录失败"
     })
   }
   //登陆成功
-  if(ctx.session.userInfo==null){
-      ctx.session.userInfo =userInfo;
+  if (ctx.session.userInfo == null) {
+      ctx.session.userInfo = userInfo;
   }
-  return new SuccessModel()
+  return new SuccessModel({
+     data: userInfo
+  })
 }
 
 

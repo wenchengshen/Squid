@@ -32,7 +32,6 @@ async function getUserInfo(username,password){
          //未找到
          return result
      }
-
      return formateUser(result.dataValues)
 }
 

@@ -15,7 +15,6 @@ const {loginCheck} =require('../../middlewares/loginChecks')
  //注册路由
  router.post('/register',async (ctx,next)=>{
     const {username,password,gender}=ctx.request.body;
-     console.log(ctx.request.body);
      //调用 controller 方法
     ctx.body=await register({username,password,gender})
  })
@@ -30,12 +29,12 @@ const {loginCheck} =require('../../middlewares/loginChecks')
 
   //登录
 
-
-
-
- router.post('/login',loginCheck,async (ctx,next)=>{
+ router.post('/login',async (ctx,next)=>{
    //username
    const {username,password}=ctx.request.body;
+
+console.log(username, "username")
+   
    ctx.body=await login({ctx,username,password})
 
   // console.log(ctx)

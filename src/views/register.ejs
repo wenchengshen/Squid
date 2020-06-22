@@ -51,10 +51,11 @@
                     // 判断用户名是否已存在
                     var userName = $inputUserName.val()
                     ajax.post('/api/user/isExist', {
-                        userName
+                       username:userName
                     }, function(err, data) {
                         $spanUserNameInfo.show()
-                        if (err) {
+                        console.log(err,"err")
+                        if (!err) {
                             $spanUserNameInfo.text('用户名可用')
                             isUserNameExist = false
                         } else {
@@ -106,7 +107,7 @@
 
                 // 提交数据
                 ajax.post('/api/user/register', {
-                    userName,
+                    username:userName,
                     password,
                     gender
                 }, function(err, data) {

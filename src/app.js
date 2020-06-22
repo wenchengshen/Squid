@@ -6,7 +6,6 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const index = require('./routes/index')
 const user = require('./routes/view/user')
 
 const { REDIS_CONF } = require('./conf/db')
@@ -14,9 +13,12 @@ const session=require('koa-generic-session')
 const redisStore=require('koa-redis')
 
 
+const path=require('path')
+
+
 const userAPIRouter=require('./routes/api/user')
 
-
+const util=require('./routes/api/util')
 // error handler
 onerror(app)
 // middlewares
@@ -26,6 +28,8 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
+
+app.use(require('koa-static')(path.join(__dirname,'..','uploadFiles' )))
 
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
@@ -59,11 +63,10 @@ app.use(session({
 // })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 
 app.use(userAPIRouter.routes(),userAPIRouter.allowedMethods())
-
+app.use(util.routes(),util.allowedMethods())
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
