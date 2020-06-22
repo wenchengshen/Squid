@@ -28,16 +28,17 @@
 
                 // 提交数据
                 ajax.post('/api/user/login', {
-                    userName,
+                    username:userName,
                     password
                 }, function(err, data) {
+                    debugger
                     if (err) {
                         alert(err)
                         return
                     }
                     // 跳转到指定 url 或首页
-                    var redirectUrl = $.query.get('url') || '/'
-                    location.href = redirectUrl
+                    // var redirectUrl = $.query.get('url') || '/'
+                    // location.href = redirectUrl
                 })
             })
         })
