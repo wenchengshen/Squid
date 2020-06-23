@@ -5,7 +5,7 @@
  * 
  * **/
 
-const {getUserInfo,createUserInfo} =require('../services/user')
+const {getUserInfo,createUserInfo,updateUserInfo} =require('../services/user')
 
 const {SuccessModel,FaliedModel} =require('../model/ResModel')
 const { errorMonitor } = require('koa')
@@ -14,8 +14,9 @@ const doCrypto=require('../util/cryp')
 // const { CITEXT } = require('sequelize/types')
 const user = require('../services/user')
 
-
-
+/***
+ * 用户是否存在
+ * **/
 async  function isExist(username){
       //业务逻辑处理
       //servers
@@ -33,11 +34,8 @@ async  function isExist(username){
       }
 }
 
-
-
 async function register({username,password,gender}){
       //获取用户信息
-      
       const userInfo =await getUserInfo(username)
       if (userInfo) {
         //不存在数据
@@ -47,7 +45,7 @@ async function register({username,password,gender}){
         })
       }
       //services 注册用户
-      try{
+    try{
         const result= await createUserInfo({username,password:doCrypto(password),gender})
         return new SuccessModel()
     }catch(err){
@@ -58,12 +56,9 @@ async function register({username,password,gender}){
     }
 }
 
-
 async function login({ctx,username,password}){
   //获取用户信息
   const userInfo =await getUserInfo(username,doCrypto(password))
-
-  console.log(userInfo, "userInfo")
   if (!userInfo) {
     //不存在数据
     return new FaliedModel({
@@ -81,8 +76,32 @@ async function login({ctx,username,password}){
 }
 
 
+async  function changeInfo({ctx,nickname,city,picture}){
+    const  {username}=ctx.session.userInfo;
+    try{
+        const result= await updateUserInfo({nickname,city,picture},{username})
+        if(result){
+            Object.assign(ctx.session.userInfo,{
+                nickname,city,picture
+            })
+            return new SuccessModel()
+        }else{
+            return new FaliedModel({
+                errno:10004,
+                message:"修改用户信息失败！"
+            })
+        }
+    }catch(err){
+        return new FaliedModel({
+            errno:10004,
+            message:"修改用户信息失败！"
+        })
+    }
+}
+
 module.exports ={
     isExist,
     register,
-    login
+    login,
+    changeInfo
 }

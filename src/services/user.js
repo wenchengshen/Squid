@@ -4,9 +4,7 @@
  * @author wencs
  *
  * **/
-
 const {User}=require('../dbn/model/index')
-
 const {formateUser} =require('./_formate')
 
 /**
@@ -34,8 +32,6 @@ async function getUserInfo(username,password){
      }
      return formateUser(result.dataValues)
 }
-
-
 /**
  * 创建用户
  * @param {string} username 用户名
@@ -53,7 +49,37 @@ async function  createUserInfo({username,password,gender=3,nickname}){
 }
 
 
+/**
+ *  修改用户信息
+ * @param {string} nickname 昵称
+ * @param {string} city 城市
+ * @param {string} picture   图片
+ * **/
+async  function updateUserInfo({nickname,city,picture},{username}){
+    const updateData={}
+    if (nickname){
+        updateData.nickname=nickname
+    }
+    if (city){
+        updateData.city=city
+    }
+    if (picture){
+        updateData.picture=picture
+    }
+
+    // 拼接查询条件
+    const whereData = {
+        username
+    }
+    // 执行修改
+    const result = await User.update(updateData, {
+        where: whereData
+    })
+    return result[0] > 0 // 修改的行数
+}
+
 module.exports={
     getUserInfo,
-    createUserInfo
+    createUserInfo,
+    updateUserInfo
 }
