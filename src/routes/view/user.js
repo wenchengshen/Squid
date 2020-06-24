@@ -31,13 +31,9 @@ router.get('/register', async (ctx, next) => {
 })
 
 
-router.get('/setting', async (ctx, next) => {
+router.get('/setting', loginRedirect,async (ctx, next) => {
     const userInfo = ctx.session.userInfo
-    console.log(userInfo)
     await ctx.render('setting', userInfo)
 })
-
-
-
 
 module.exports = router

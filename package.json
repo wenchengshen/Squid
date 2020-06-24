@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
-    "prd": "cross-env NODE_ENV=production pm2 start bin/www",
-    "test": ""
+    "dev":  "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
+    "prd":  "cross-env NODE_ENV=production pm2 start bin/www",
+    "test": "cross-env NODE_ENV=test jest --runInBand --forceExit --colors"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -31,6 +31,8 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2",
+    "jest": "^26.1.0"
   }
 }

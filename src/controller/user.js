@@ -23,10 +23,10 @@ async  function isExist(username){
       //统一返回
       const userInfo = await getUserInfo(username)
       if (!userInfo) {
-        //存在
+        //不存在
         return new SuccessModel(userInfo)
       }else{
-        //不存在数据
+        //不用户名云子
         return new FaliedModel({
             errno:10003,
             message:"用户已存在"
@@ -126,6 +126,8 @@ async function logout(ctx) {
     delete ctx.session.userInfo
     return new SuccessModel()
 }
+
+
 
 
 module.exports ={
