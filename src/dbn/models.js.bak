@@ -1,7 +1,7 @@
 const  Sequelize=require("sequelize")
 
 
-const seq = require('./db.js')
+/**const seq = require('./db.js')*/
 
 const User=seq.define('user',{
     username:{

@@ -5,18 +5,14 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-
 const user = require('./routes/view/user')
-
 const { REDIS_CONF } = require('./conf/db')
 const session=require('koa-generic-session')
 const redisStore=require('koa-redis')
-
-
 const path=require('path')
 
-
 const userAPIRouter=require('./routes/api/user')
+const blogIndexAPIRouter=require('./routes/api/blogIndex')
 
 const util=require('./routes/api/util')
 // error handler
@@ -64,7 +60,9 @@ app.use(session({
 
 // routes
 app.use(user.routes(), user.allowedMethods())
-
+//主页
+app.use(blogIndexAPIRouter.routes(), blogIndexAPIRouter.allowedMethods())
+//用户
 app.use(userAPIRouter.routes(),userAPIRouter.allowedMethods())
 app.use(util.routes(),util.allowedMethods())
 // error-handling

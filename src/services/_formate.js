@@ -27,6 +27,12 @@ function  formateUser(list){
    return  _formateUserPicture(list)
 }
 
+function formateBlog(list){
+
+}
+
+
 module.exports={
-    formateUser
+    formateUser,
+    formateBlog
 }

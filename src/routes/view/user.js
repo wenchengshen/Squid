@@ -9,7 +9,6 @@ function getLoginInfo(ctx) {
     let data = {
         isLogin: false // 默认未登录
     }
-
     const userInfo = ctx.session.userInfo
     if (userInfo) {
         data = {
@@ -17,7 +16,6 @@ function getLoginInfo(ctx) {
             userName: userInfo.userName
         }
     }
-
     return data
 }
 
