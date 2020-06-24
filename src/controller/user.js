@@ -99,9 +99,40 @@ async  function changeInfo({ctx,nickname,city,picture}){
     }
 }
 
+
+async function changePassword(username, password, newPassword){
+    const result=await updateUserInfo(
+        {
+            newPassword:doCrypto(newPassword)
+        },{
+            username,
+            password:doCrypto(password)
+        }
+    )
+    if(result){
+        return new SuccessModel()
+    }
+    return new FaliedModel({
+        errno:100090,
+        message:"信息错误"
+    })
+}
+
+/**
+ * 退出登录
+ * @param {Object} ctx ctx
+ */
+async function logout(ctx) {
+    delete ctx.session.userInfo
+    return new SuccessModel()
+}
+
+
 module.exports ={
     isExist,
     register,
     login,
-    changeInfo
+    changeInfo,
+    changePassword,
+    logout
 }

@@ -54,7 +54,7 @@ async function  createUserInfo({username,password,gender=3,nickname}){
  * @param {string} city 城市
  * @param {string} picture   图片
  * **/
-async  function updateUserInfo({nickname,city,picture},{username}){
+async  function updateUserInfo({nickname,city,picture,newPassword},{username,password}){
     const updateData={}
     if (nickname){
         updateData.nickname=nickname
@@ -65,10 +65,16 @@ async  function updateUserInfo({nickname,city,picture},{username}){
     if (picture){
         updateData.picture=picture
     }
+    if(newPassword){
+        updateData.password=newPassword
+    }
 
     // 拼接查询条件
     const whereData = {
         username
+    }
+    if(password){
+        whereData.password=password
     }
     // 执行修改
     const result = await User.update(updateData, {
