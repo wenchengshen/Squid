@@ -7,7 +7,6 @@ const {Blog,User}=require('../dbn/model/index')
 const {formateUser,formateBlog} =require('./_formate')
 
 async  function getBlogList({ userId,pageIndex,pageSize=10}){
-    console.log(userId,"result",userId,"userId")
       const result=await  Blog.findAndCountAll({
           limit: pageSize, // 每页多少条
           offset: pageSize * pageIndex, // 跳过多少条
@@ -24,17 +23,35 @@ async  function getBlogList({ userId,pageIndex,pageSize=10}){
               }
           ]
       })
-   console.log(result,"result",userId,"userId")
     if(!result) return
     let blogList =result.rows.map(row=>row.dataValues)
     return {
         count:blogList.count,
         blogList
     }
-    // return {}
 }
 
-
+async  function getBlogListBySquare({pageIndex,pageSize=10}){
+    const result=await  Blog.findAndCountAll({
+        limit: pageSize, // 每页多少条
+        offset: pageSize * pageIndex, // 跳过多少条
+        order: [
+            ['id', 'desc']
+        ],
+        include:[
+            {
+                model: User,
+                attributes: ['username', 'nickname', 'picture'],
+            }
+        ]
+    })
+    if(!result) return
+    let blogList =result.rows.map(row=>row.dataValues)
+    return {
+        count:blogList.count,
+        blogList
+    }
+}
 
 /**
  * 创建微博
@@ -48,7 +65,12 @@ async  function createBlog({userId,content,image}){
      })
     return result.dataValues
 }
+
+
+
+
 module.exports={
     getBlogList,
-    createBlog
+    createBlog,
+    getBlogListBySquare
 }

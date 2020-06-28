@@ -44,10 +44,6 @@ async  function getIndexList(pageIndex=0,userId){
     })
 }
 
-
-async function getFans(userId){
-
-}
 module.exports={
     getIndexList,
     create
