@@ -1,6 +1,6 @@
 /**
  * @author wencs
- * @description 微博列表
+ * @description 列表
  * ***/
 const seq = require('../seq')
 

@@ -2,14 +2,10 @@
  * @descp  userRelation
  * @wencs
  * *****/
-
-
 const seq =require('../seq')
 const {
     INTEGER
 }=require('../types')
-
-
 
 const UserRelation=seq.define('userRelation',{
     userId:{
@@ -23,6 +19,4 @@ const UserRelation=seq.define('userRelation',{
         comment: "被关注的用户id"
     }
 })
-
-
 module.exports=UserRelation

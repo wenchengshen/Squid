@@ -66,9 +66,6 @@ async  function createBlog({userId,content,image}){
     return result.dataValues
 }
 
-
-
-
 module.exports={
     getBlogList,
     createBlog,

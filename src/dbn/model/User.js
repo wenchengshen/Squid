@@ -2,16 +2,10 @@
  * @descp  user
  * @wencs
  * *****/
-
-
  const seq =require('../seq')
-
  const {
     STRING,
-    DECIMAL,
-    TEXT,
-    INTEGER,
-    BOOLEAN
+    DECIMAL
  }=require('../types')
 
  const User=seq.define('user', {
