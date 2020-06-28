@@ -6,13 +6,14 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const user = require('./routes/view/user')
+const blog = require('./routes/view/blog')
 const { REDIS_CONF } = require('./conf/db')
 const session=require('koa-generic-session')
 const redisStore=require('koa-redis')
 const path=require('path')
 
 const userAPIRouter=require('./routes/api/user')
-const blogIndexAPIRouter=require('./routes/api/blogIndex')
+const blogIndexAPIRouter=require('./routes/api/blog')
 
 const util=require('./routes/api/util')
 // error handler
@@ -60,6 +61,7 @@ app.use(session({
 
 // routes
 app.use(user.routes(), user.allowedMethods())
+app.use(blog.routes(), blog.allowedMethods())
 //主页
 app.use(blogIndexAPIRouter.routes(), blogIndexAPIRouter.allowedMethods())
 //用户

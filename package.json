@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev":  "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
-    "prd":  "cross-env NODE_ENV=production pm2 start bin/www",
+    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
+    "prd": "cross-env NODE_ENV=production pm2 start bin/www",
     "test": "cross-env NODE_ENV=test jest --runInBand --forceExit --colors"
   },
   "dependencies": {
@@ -26,13 +26,14 @@
     "koa-views": "^6.2.0",
     "koa2-cookie-session": "^0.0.1",
     "mysql2": "^2.1.0",
+    "pm2": "^4.4.0",
     "redis": "^3.0.2",
     "sequelize": "^5.21.12"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
+    "jest": "^26.1.0",
     "nodemon": "^1.19.1",
-    "supertest": "^4.0.2",
-    "jest": "^26.1.0"
+    "supertest": "^4.0.2"
   }
 }

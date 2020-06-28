@@ -3,12 +3,32 @@
  * **/
 
 const {PAGE_SIZE}=require('../conf/constant')
-const {SuccessModel}=require('../model/ResModel')
-const {getBlogList}=require('../services/blog')
+const {SuccessModel,ErrorModel}=require('../model/ResModel')
+const {getBlogList,createBlog}=require('../services/blog')
+// const xss = require('xss')
 
+
+/***
+ * 新增数据
+ * **/
+async  function create({userId, content, image}){
+    // 创建微博
+    try {
+        const blog = await createBlog({
+            userId,
+            content,
+            image
+        })
+        return new SuccessModel(blog)
+    }catch (ex) {
+        console.error(ex.message, ex.stack)
+        return new ErrorModel({errno:10009,message:"创建失败"})
+    }
+}
 //获取列表
 async  function getIndexList(pageIndex=0,userId){
-     const result= await  getBlogList(
+    console.log(userId,pageIndex,"pageIndex");
+    const result= await  getBlogList(
          {
              userId,
              pageIndex,
@@ -23,6 +43,12 @@ async  function getIndexList(pageIndex=0,userId){
         count
     })
 }
+
+
+async function getFans(userId){
+
+}
 module.exports={
-    getIndexList
+    getIndexList,
+    create
 }

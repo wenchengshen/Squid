@@ -26,7 +26,7 @@ const { FaliedModel } = require("../model/ResModel")
         return
     }
     const url=ctx.url;
-    ctx.redirect('/login?url='+encodeURIComponent(url))
+    ctx.redirect('/login')
  }
 
  module.exports={
