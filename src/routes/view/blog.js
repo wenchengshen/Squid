@@ -51,9 +51,13 @@ router.get('/',loginRedirect, async  (ctx,next)=>{
        })
 })
 
+router.get('/profile',loginRedirect, async  (ctx,next)=>{
+    const {username}=ctx.session.userInfo;
+    ctx.redirect(`/profile/${username}`)
+})
 
-router.get('/profile/:username',loginRedirect,loginRedirect, async  (ctx,next)=>{
-       const {username}=ctx.session.userInfo;
+router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
+       const userInfo=ctx.session.userInfo;
        await  ctx.render('profile',{
            userData: {
                userInfo,
