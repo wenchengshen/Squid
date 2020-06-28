@@ -7,7 +7,6 @@ const { FaliedModel } = require("../model/ResModel")
 
 
  async  function  loginCheck(ctx,next){
-     console.log(ctx.session,"session1");
      if(ctx.session && ctx.session.userInfo){
            await next()
            return
@@ -20,7 +19,6 @@ const { FaliedModel } = require("../model/ResModel")
  }
 
  async function loginRedirect(ctx,next){
-     console.log(ctx.session,"session2");
      if(ctx.session && ctx.session.userInfo){
         await next()
         return

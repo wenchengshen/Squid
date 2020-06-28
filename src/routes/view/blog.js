@@ -6,7 +6,7 @@ const {getSquareBlogList} =require('../../controller/square')
 const {getFans,getFollowers} =require('../../controller/user-relation')
 
 
-
+const {isExist} =require('../../controller/user')
 
 /**主页**/
 router.get('/',loginRedirect, async  (ctx,next)=>{
@@ -57,26 +57,62 @@ router.get('/profile',loginRedirect, async  (ctx,next)=>{
 })
 
 router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
-       const userInfo=ctx.session.userInfo;
+       //登录用户信息
+       const myUserInfo=ctx.session.userInfo;
+       const myUserName=myUserInfo.username;
+       //获取数据列表
+       let curUserInfo
+
+       const { username: curUserName } = ctx.params
+    console.log(ctx.params,curUserName,"curUserInfo");
+
+       const isMe = myUserName === curUserName  //当前用户是否等于登录的用户
+      if(isMe){
+          // 是当前登录用户
+          curUserInfo = myUserInfo
+      }else{
+          // 不是当前登录用户
+          const existResult = await isExist(curUserName)
+          if (existResult.errno !== 0) {
+              // 用户名不存在
+              return
+          }
+          // 用户名存在
+          curUserInfo = existResult.data
+      }
+
+
+    console.log(curUserInfo,"curUserInfo");
+    const result = await getIndexList(0,curUserInfo.id)
+    const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
+
+    // 获取粉丝
+    const fansResult = await getFans(curUserInfo.id)
+    const { count: fansCount, fansList } = fansResult.data
+
+    // 获取关注人列表
+    const followersResult = await getFollowers(curUserInfo.id)
+    const { count: followersCount, followersList } = followersResult.data
+
        await  ctx.render('profile',{
            userData: {
-               userInfo,
+               userInfo:curUserInfo,
                fansData: {
-                   count: 1,
-                   list: []
+                   count: fansCount,
+                   list: fansList
                },
                followersData: {
-                   count: 1,
-                   list: []
+                   count: followersCount,
+                   list: followersList
                },
                atCount:1
            },
            blogData: {
-               isEmpty:1,
-               blogList:[],
-               pageSize:1,
-               pageIndex:1,
-               count:1
+               isEmpty,
+               blogList,
+               pageSize,
+               pageIndex,
+               count
            }
        })
 })

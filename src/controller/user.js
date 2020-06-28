@@ -22,7 +22,7 @@ async  function isExist(username){
       //servers
       //统一返回
       const userInfo = await getUserInfo(username)
-      if (!userInfo) {
+      if (userInfo) {
         //不存在
         return new SuccessModel(userInfo)
       }else{

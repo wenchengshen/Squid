@@ -27,7 +27,6 @@ async  function create({userId, content, image}){
 }
 //获取列表
 async  function getIndexList(pageIndex=0,userId){
-    console.log(userId,pageIndex,"pageIndex");
     const result= await  getBlogList(
          {
              userId,
@@ -43,6 +42,9 @@ async  function getIndexList(pageIndex=0,userId){
         count
     })
 }
+
+
+
 
 module.exports={
     getIndexList,

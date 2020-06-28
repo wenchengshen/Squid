@@ -19,7 +19,6 @@ function  formateUser(list){
    if(list===null){
        return list
    }
-   console.log(list,"list1")
    if(list instanceof  Array){
        return  list.map(_formateUserPicture)
    }
