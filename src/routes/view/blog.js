@@ -1,7 +1,7 @@
 const router = require('koa-router')()
 
 const {loginRedirect} =require('../../middlewares/loginChecks')
-const {getIndexList} =require('../../controller/blog')
+const {getIndexList,getIndexListAll} =require('../../controller/blog')
 const {getSquareBlogList} =require('../../controller/square')
 const {getFans,getFollowers} =require('../../controller/user-relation')
 
@@ -13,11 +13,6 @@ router.get('/',loginRedirect, async  (ctx,next)=>{
        const {userInfo}=ctx.session;
        const {id:userId}=ctx.session.userInfo;
 
-    // 获取第一页数据
-    const result = await getIndexList(0,userId)
-    const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
-
-
     // 获取粉丝
     const fansResult = await getFans(userId)
     const { count: fansCount, fansList } = fansResult.data
@@ -28,6 +23,14 @@ router.get('/',loginRedirect, async  (ctx,next)=>{
     const followersResult = await getFollowers(userId)
     const { count: followersCount, followersList } = followersResult.data
 
+
+    let followerIdArray=followersList.map(item=>item.followerId)
+    followerIdArray.push(userId)
+    console.log(followerIdArray,"followerIdArray");
+
+    // 获取第一页数据
+    const result = await getIndexListAll(0,followerIdArray)
+    const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
     await  ctx.render('index',{
            userData: {
                userInfo,
