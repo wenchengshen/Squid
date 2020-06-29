@@ -79,7 +79,7 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
           // 用户名存在
           curUserInfo = existResult.data
       }
-    console.log(isMe,"isMeisMeisMe");
+
     const result = await getIndexList(0,curUserInfo.id)
     const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
 
@@ -90,6 +90,12 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
     // 获取关注人列表
     const followersResult = await getFollowers(curUserInfo.id)
     const { count: followersCount, followersList } = followersResult.data
+
+
+    //是否关注此人
+   const amIFollowed = followersList.some(item=>{
+        return item.username === myUserName
+    })
 
        await  ctx.render('profile',{
            userData: {
@@ -103,7 +109,8 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
                    list: followersList
                },
                atCount:1,
-               isMe
+               isMe,
+               amIFollowed
            },
            blogData: {
                isEmpty,

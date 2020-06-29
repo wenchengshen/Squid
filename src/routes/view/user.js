@@ -13,7 +13,7 @@ function getLoginInfo(ctx) {
     if (userInfo) {
         data = {
             isLogin: true,
-            userName: userInfo.userName
+            username: userInfo.username
         }
     }
     return data

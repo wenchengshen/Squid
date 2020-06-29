@@ -5,9 +5,9 @@
     </p>
     <div class="user-list clear-fix">
         <% userList.forEach(user => { %>
-            <a href="/profile/<%= user.userName%>" class="user-item float-left">
+            <a href="/profile/<%= user.nickname%>" class="user-item float-left">
                 <img src="<%= user.picture%>"/>
-                <span><%= user.nickName%></span>
+                <span><%= user.nickname%></span>
             </a>
         <% }) %>
     </div>

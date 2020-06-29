@@ -14,6 +14,7 @@ const path=require('path')
 
 const userAPIRouter=require('./routes/api/user')
 const blogIndexAPIRouter=require('./routes/api/blog')
+const profileIndexAPIRouter=require('./routes/api/profile')
 
 const util=require('./routes/api/util')
 // error handler
@@ -60,6 +61,7 @@ app.use(blogIndexAPIRouter.routes(), blogIndexAPIRouter.allowedMethods())
 //用户
 app.use(userAPIRouter.routes(),userAPIRouter.allowedMethods())
 app.use(util.routes(),util.allowedMethods())
+app.use(profileIndexAPIRouter.routes(),profileIndexAPIRouter.allowedMethods())
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
