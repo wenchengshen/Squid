@@ -92,14 +92,14 @@
                 e.preventDefault()
 
                 // 验证
-                if (isUserNameExist) {
-                    alert('用户名已存在')
-                    return
-                }
-                if (!isPasswordSame) {
-                    alert('两次密码不一致')
-                    return
-                }
+                // if (isUserNameExist) {
+                //     alert('用户名已存在')
+                //     return
+                // }
+                // if (!isPasswordSame) {
+                //     alert('两次密码不一致')
+                //     return
+                // }
 
                 var userName = $inputUserName.val()
                 var password = $inputPassword.val()
@@ -111,11 +111,11 @@
                     password,
                     gender
                 }, function(err, data) {
-                    if (err) {
-                        alert(err)
-                        return
-                    }
-                    alert('注册成功，请登录')
+                    // if (err) {
+                    //     alert(err)
+                    //     return
+                    // }
+                    // alert('注册成功，请登录')
                     location.href = '/login'
                 })
             })
@@ -124,3 +124,8 @@
 <% } %>
 
 <%- include('layout/footer')%>
+
+
+
+
+

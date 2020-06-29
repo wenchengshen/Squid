@@ -7,7 +7,7 @@
 
 const router = require('koa-router')()
 const {loginCheck} =require('../../middlewares/loginChecks')
-const {getIndexList,create} =require('../../controller/blog')
+const {getIndexList,create,getIndexListAll} =require('../../controller/blog')
 const {getFans,getFollowers} =require('../../controller/user-relation')
 
 router.prefix('/api/blog')
@@ -29,15 +29,18 @@ router.get('/loadMore/:pageIndex',loginCheck,async (ctx,next)=>{
       const pageNum=Number(pageIndex); //整数类型
       const { id: userId } = ctx.session.userInfo
 
-      // //获取关注人的信息
-      // const followersResult = await getFollowers(userId)
-      // const { count: followersCount, followersList } = followersResult.data
-      //
-      // const followerIdArray=followersList.map(item=>item.followerId)
-      // console.log(followerIdArray,"followerIdArray");
+      const followersResult = await getFollowers(userId)
+      const { count: followersCount, followersList } = followersResult.data
 
 
-      const result=await getIndexList(pageNum,userId)
+      let followerIdArray=followersList.map(item=>item.followerId)
+      followerIdArray.push(userId)
+
+      // 获取第一页数据
+      const result = await getIndexListAll(pageIndex,followerIdArray)
+      // const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
+
+      // const result=await getIndexList(pageNum,userId)
       ctx.body=result
 })
 

@@ -26,7 +26,7 @@ async  function getBlogList({ userId,pageIndex,pageSize=10}){
     if(!result) return
     let blogList =result.rows.map(row=>row.dataValues)
     return {
-        count:blogList.count,
+        count:result.count,
         blogList
     }
 }

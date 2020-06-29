@@ -26,7 +26,6 @@ router.get('/',loginRedirect, async  (ctx,next)=>{
 
     let followerIdArray=followersList.map(item=>item.followerId)
     followerIdArray.push(userId)
-    console.log(followerIdArray,"followerIdArray");
 
     // 获取第一页数据
     const result = await getIndexListAll(0,followerIdArray)
@@ -87,6 +86,7 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
 
     const result = await getIndexList(0,curUserInfo.id)
     const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
+
 
     // 获取粉丝
     const fansResult = await getFans(curUserInfo.id)
