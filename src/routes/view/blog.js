@@ -64,7 +64,6 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
        let curUserInfo
 
        const { username: curUserName } = ctx.params
-    console.log(ctx.params,curUserName,"curUserInfo");
 
        const isMe = myUserName === curUserName  //当前用户是否等于登录的用户
       if(isMe){
@@ -80,9 +79,7 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
           // 用户名存在
           curUserInfo = existResult.data
       }
-
-
-    console.log(curUserInfo,"curUserInfo");
+    console.log(isMe,"isMeisMeisMe");
     const result = await getIndexList(0,curUserInfo.id)
     const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
 
@@ -105,7 +102,8 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
                    count: followersCount,
                    list: followersList
                },
-               atCount:1
+               atCount:1,
+               isMe
            },
            blogData: {
                isEmpty,
