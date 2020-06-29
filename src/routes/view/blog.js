@@ -60,6 +60,7 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
        //登录用户信息
        const myUserInfo=ctx.session.userInfo;
        const myUserName=myUserInfo.username;
+       const myUserId = myUserInfo.id
        //获取数据列表
        let curUserInfo
 
@@ -80,6 +81,7 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
           curUserInfo = existResult.data
       }
 
+
     const result = await getIndexList(0,curUserInfo.id)
     const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
 
@@ -90,14 +92,11 @@ router.get('/profile/:username',loginRedirect, async  (ctx,next)=>{
     // 获取关注人列表
     const followersResult = await getFollowers(curUserInfo.id)
     const { count: followersCount, followersList } = followersResult.data
-
-
     //是否关注此人
-   const amIFollowed = followersList.some(item=>{
+   const amIFollowed = fansList.some(item=>{
         return item.username === myUserName
     })
-
-       await  ctx.render('profile',{
+    await  ctx.render('profile',{
            userData: {
                userInfo:curUserInfo,
                fansData: {
