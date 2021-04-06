@@ -5187,9 +5187,9 @@ symbol-tree@^3.2.4:
   integrity sha1-QwY30ki6d+B4iDlR+5qg7tfGP6I=
 
 systeminformation@^4.23.3:
-  version "4.26.9"
-  resolved "https://registry.npm.taobao.org/systeminformation/download/systeminformation-4.26.9.tgz?cache=0&sync_timestamp=1591453222894&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fsysteminformation%2Fdownload%2Fsysteminformation-4.26.9.tgz#ecc725a162c0c7d8d48226f97637a5f590042ffd"
-  integrity sha1-7McloWLAx9jUgib5djel9ZAEL/0=
+  version "4.34.19"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-4.34.19.tgz#c5f066cc043482686d95bbc554d52e6ec9e42367"
+  integrity sha512-ssUYQ0s1FFeb8EGtyCX/41cC/XaF84gbNAUfaUTziibx+xCAaR0zrOy0yZlnUrsWDQ+snp/Utl8cx8IdtrevrA==
 
 term-size@^1.2.0:
   version "1.2.0"
